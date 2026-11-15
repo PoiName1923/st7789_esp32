@@ -1,0 +1,8 @@
+## Versions verified on components.espressif.com (2026-11):
+##   esp_lvgl_port 2.9.0 requires idf >=5.2, lvgl >=8,<10
+##   lvgl 9.4 GIF API (lv_gif_set_color_format / lv_gif_is_loaded) checked against release/v9.4 source.
+## IDF is capped below 6.0: v6.x removed the built-in cJSON and v6.1 reworked esp_lcd color config.
+dependencies:
+  idf: ">=5.3,<6.0"
+  espressif/esp_lvgl_port: "~2.9.0"
+  lvgl/lvgl: "~9.4.0"

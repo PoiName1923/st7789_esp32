@@ -1,0 +1,186 @@
+menu "Desktop Robot"
+
+    menu "Display (ST7789)"
+        config ROBOT_DISPLAY_WIDTH
+            int "DISPLAY_WIDTH (px)"
+            default 240
+        config ROBOT_DISPLAY_HEIGHT
+            int "DISPLAY_HEIGHT (px)"
+            default 240
+        config ROBOT_LCD_RAM_HEIGHT
+            int "Controller RAM rows (ST7789 = 320)"
+            default 320
+            help
+                Used to compute the 180/270 degree offset of 240x240 panels.
+        config ROBOT_DISPLAY_SPI_CLOCK_MHZ
+            int "DISPLAY_SPI_CLOCK (MHz)"
+            range 1 80
+            default 40
+            help
+                40 MHz is reliable on short wires. Drop to 20 if you see noise.
+        config ROBOT_LCD_SPI_MODE
+            int "SPI mode (modules without CS usually need 3)"
+            range 0 3
+            default 0
+        config ROBOT_DISPLAY_ROTATION
+            int "DISPLAY_ROTATION (0/90/180/270)"
+            default 0
+        config ROBOT_DISPLAY_BGR
+            bool "DISPLAY_COLOR_ORDER: panel is BGR (red shows as blue)"
+            default n
+        config ROBOT_LCD_INVERT
+            bool "Invert colors (most ST7789 IPS panels need this)"
+            default y
+        config ROBOT_LCD_OFFSET_X
+            int "Extra X offset (calibration)"
+            default 0
+        config ROBOT_LCD_OFFSET_Y
+            int "Extra Y offset (calibration)"
+            default 0
+        config ROBOT_DISPLAY_TEST_PATTERN_MS
+            int "Boot color-bar test pattern duration (ms, 0 = off)"
+            default 1500
+    endmenu
+
+    menu "Pins"
+        config ROBOT_PIN_LCD_MOSI
+            int "PIN_LCD_MOSI"
+            default 11
+        config ROBOT_PIN_LCD_SCLK
+            int "PIN_LCD_SCLK"
+            default 12
+        config ROBOT_PIN_LCD_CS
+            int "PIN_LCD_CS (-1 = not connected)"
+            default 10
+        config ROBOT_PIN_LCD_DC
+            int "PIN_LCD_DC"
+            default 14
+        config ROBOT_PIN_LCD_RST
+            int "PIN_LCD_RST (-1 = not connected)"
+            default 13
+        config ROBOT_PIN_LCD_BL
+            int "PIN_LCD_BL (-1 = backlight tied to 3V3)"
+            default -1
+        config ROBOT_PIN_DHT11
+            int "PIN_DHT11"
+            default 4
+    endmenu
+
+    menu "Features"
+        config ROBOT_ENABLE_WEATHER
+            bool "ENABLE_WEATHER"
+            default y
+        config ROBOT_ENABLE_SENSOR
+            bool "ENABLE_SENSOR"
+            default y
+        config ROBOT_ENABLE_GIF_ANIMATIONS
+            bool "ENABLE_GIF_ANIMATIONS (else built-in drawn face only)"
+            default y
+        choice ROBOT_GIF_SOURCE
+            prompt "GIF source"
+            depends on ROBOT_ENABLE_GIF_ANIMATIONS
+            default ROBOT_GIF_EMBEDDED
+            config ROBOT_GIF_EMBEDDED
+                bool "Embedded in firmware (assets/gifs/*.gif)"
+            config ROBOT_GIF_FROM_FS
+                bool "SPIFFS 'storage' partition (assets/gifs/*.gif flashed as image)"
+        endchoice
+    endmenu
+
+    menu "Wi-Fi"
+        config ROBOT_ADMIN_PASSWORD
+            string "Initial web administrator password"
+            default ""
+            help
+                Required before first flash. No shared default is provided.
+        config ROBOT_AP_SSID
+            string "Fallback setup access-point SSID"
+            default "DesktopRobot"
+        config ROBOT_AP_PASSWORD
+            string "Fallback setup access-point password (ASCII, 8-63 chars)"
+            default ""
+            help
+                Required before first flash. Use a different value from the administrator password.
+        config ROBOT_WIFI_SSID
+            string "SSID (empty = offline mode)"
+            default ""
+        config ROBOT_WIFI_PASSWORD
+            string "Password"
+            default ""
+        config ROBOT_WIFI_BACKOFF_MAX_S
+            int "Max reconnect backoff (s)"
+            default 300
+    endmenu
+
+    menu "Weather (Open-Meteo)"
+        config ROBOT_WEATHER_LATITUDE
+            string "WEATHER_LATITUDE"
+            default "10.8231"
+        config ROBOT_WEATHER_LONGITUDE
+            string "WEATHER_LONGITUDE"
+            default "106.6297"
+        config ROBOT_WEATHER_TIMEZONE
+            string "Timezone (IANA name or 'auto')"
+            default "auto"
+        config ROBOT_WEATHER_UPDATE_INTERVAL_MIN
+            int "WEATHER_UPDATE_INTERVAL (minutes)"
+            range 5 180
+            default 15
+    endmenu
+
+    menu "Sensor (DHT11)"
+        config ROBOT_SENSOR_INTERVAL_MS
+            int "Read interval (ms)"
+            range 2000 5000
+            default 3000
+        config ROBOT_SENSOR_STALE_S
+            int "Mark reading stale after (s)"
+            default 30
+    endmenu
+
+    menu "Animation & screens"
+        config ROBOT_ANIMATION_DEFAULT_FPS
+            int "ANIMATION_DEFAULT_FPS (LVGL refresh cap)"
+            range 5 50
+            default 25
+        config ROBOT_ANIMATION_IDLE_DURATION_MS
+            int "ANIMATION_IDLE_DURATION: idle time before an alternate expression (ms)"
+            default 8000
+        config ROBOT_EXPRESSION_DURATION_MS
+            int "Expression duration (ms)"
+            default 2500
+        config ROBOT_BLINK_MIN_MS
+            int "Min time between blinks (ms)"
+            default 2000
+        config ROBOT_BLINK_MAX_MS
+            int "Max time between blinks (ms)"
+            default 6000
+        config ROBOT_SCREEN_SWITCH_INTERVAL_S
+            int "SCREEN_SWITCH_INTERVAL: face time between info screens (s)"
+            default 30
+        config ROBOT_INFO_SCREEN_DURATION_S
+            int "How long weather/sensor screens stay (s)"
+            default 6
+        choice ROBOT_TRANSITION
+            prompt "Screen transition"
+            default ROBOT_TRANSITION_FADE
+            config ROBOT_TRANSITION_FADE
+                bool "Fade"
+            config ROBOT_TRANSITION_SLIDE
+                bool "Slide"
+        endchoice
+        config ROBOT_TRANSITION_MS
+            int "Transition time (ms)"
+            default 400
+    endmenu
+
+    menu "Diagnostics"
+        config ROBOT_MONITOR_INTERVAL_S
+            int "Heap/FPS log interval (s, 0 = off)"
+            default 10
+        config ROBOT_SELFTEST
+            bool "Run on-target self-test at boot (GIF switching, heap, Wi-Fi reconnect)"
+            default n
+    endmenu
+
+endmenu

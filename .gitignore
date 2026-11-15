@@ -1,0 +1,48 @@
+# ESP-IDF output and local configuration
+/build/
+/build_*/
+/managed_components/
+/sdkconfig
+/sdkconfig.old
+/sdkconfig.*.old
+/compile_commands.json
+
+# Local editor state (contains absolute paths and COM-port choices)
+/.vscode/
+/.idea/
+*.code-workspace
+
+# Python caches and downloaded packaging dependencies
+__pycache__/
+*.py[cod]
+.pytest_cache/
+/companion/.vendor/
+/companion/.build/
+
+# Generated Windows distributions and archives
+/companion/dist/
+/companion/*.zip
+/companion/*.7z
+
+# Host-test executables and coverage output
+/tests/host/test_runner
+/tests/host/test_runner.exe
+*.gcda
+*.gcno
+*.gcov
+
+# User-imported artwork; keep only its documentation
+/assets/gifs/*.gif
+!/assets/gifs/README.md
+
+# Device-specific HTTPS material from the retired Wi-Fi controller
+/components/web/assets/server.key
+/components/web/assets/server.crt
+
+# Agent scratch space and common temporary files
+/.superpowers/
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db

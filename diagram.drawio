@@ -1,0 +1,122 @@
+<mxfile host="65bd71144e">
+    <diagram id="desktop-robot-wiring" name="Wiring">
+        <mxGraphModel dx="1413" dy="973" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0" adaptiveColors="auto">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1F2937;" value="SƠ ĐỒ ĐẤU DÂY DESKTOP ROBOT" vertex="1">
+                    <mxGeometry height="40" width="620" x="250" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="esp" parent="1" style="rounded=1;arcSize=15;whiteSpace=wrap;html=1;fillColor=#E8F1FB;strokeColor=#3B82C4;strokeWidth=2;fontSize=16;fontColor=#1F2937;" value="&lt;b&gt;ESP32-S3 N16R8&lt;/b&gt;&lt;br&gt;&lt;small&gt;Firmware Desktop Robot&lt;/small&gt;" vertex="1">
+                    <mxGeometry height="360" width="250" x="400" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="lcd" parent="1" style="rounded=1;arcSize=15;whiteSpace=wrap;html=1;fillColor=#E9F7ED;strokeColor=#42A85A;strokeWidth=2;fontSize=16;fontColor=#1F2937;" value="&lt;b&gt;ST7789 240×240&lt;/b&gt;&lt;br&gt;&lt;small&gt;Màn hình SPI&lt;/small&gt;" vertex="1">
+                    <mxGeometry height="360" width="220" x="1030" y="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="dht" parent="1" style="rounded=1;arcSize=15;whiteSpace=wrap;html=1;fillColor=#FFF4DB;strokeColor=#D99A16;strokeWidth=2;fontSize=16;fontColor=#1F2937;" value="&lt;b&gt;DHT11&lt;/b&gt;&lt;br&gt;&lt;small&gt;Nhiệt độ / độ ẩm&lt;/small&gt;" vertex="1">
+                    <mxGeometry height="150" width="220" x="850" y="540" as="geometry"/>
+                </mxCell>
+                <mxCell id="note" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF8C5;strokeColor=#D6B656;fontSize=14;fontColor=#1F2937;" value="&lt;b&gt;Lưu ý&lt;/b&gt;&lt;br&gt;BL nối 3V3 vì PIN_LCD_BL = -1&lt;br&gt;Màn hình dùng logic 3.3V" vertex="1">
+                    <mxGeometry height="120" width="250" x="50" y="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3v3lcd" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#DC2626;strokeWidth=3;fontColor=#B91C1C;fontSize=13;defaultLabelBackgroundColor=page;" target="lcd" value="3V3 → VCC + BL">
+                    <mxGeometry relative="1" y="20" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="840" y="170"/>
+                            <mxPoint x="840" y="170"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="egndlcd" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#111827;strokeWidth=3;fontColor=#111827;fontSize=13;defaultLabelBackgroundColor=page;" target="lcd" value="GND → GND">
+                    <mxGeometry relative="1" y="-10" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="850" y="240"/>
+                            <mxPoint x="850" y="240"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="esclk" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#2563EB;strokeWidth=2;fontColor=#1D4ED8;fontSize=13;defaultLabelBackgroundColor=page;" target="lcd" value="GPIO12 → SCL/SCLK">
+                    <mxGeometry relative="1" y="-20" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="840" y="330"/>
+                            <mxPoint x="840" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="emosi" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#7C3AED;strokeWidth=2;fontColor=#6D28D9;fontSize=13;defaultLabelBackgroundColor=page;" target="lcd" value="GPIO11 → SDA/MOSI">
+                    <mxGeometry relative="1" x="-0.1373" y="20" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="820" y="390"/>
+                            <mxPoint x="820" y="390"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ecs" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#EA580C;strokeWidth=2;fontColor=#C2410C;fontSize=13;defaultLabelBackgroundColor=page;" target="lcd" value="GPIO10 → CS">
+                    <mxGeometry relative="1" y="-10" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="840" y="210"/>
+                            <mxPoint x="840" y="210"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edc" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#0891B2;strokeWidth=2;fontColor=#0E7490;fontSize=13;defaultLabelBackgroundColor=page;" target="lcd" value="GPIO14 → DC">
+                    <mxGeometry relative="1" y="10" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="850" y="140"/>
+                            <mxPoint x="850" y="140"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="erst" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#DB2777;strokeWidth=2;fontColor=#BE185D;fontSize=13;defaultLabelBackgroundColor=page;" target="lcd" value="GPIO13 → RES/RST">
+                    <mxGeometry relative="1" y="-20" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="840" y="280"/>
+                            <mxPoint x="840" y="280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e3v3dht" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#DC2626;strokeWidth=3;fontColor=#B91C1C;fontSize=13;defaultLabelBackgroundColor=page;" target="dht" value="3V3 → VCC">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-80" as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="525" y="510"/>
+                            <mxPoint x="960" y="510"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="egnddht" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#111827;strokeWidth=3;fontColor=#111827;fontSize=13;defaultLabelBackgroundColor=page;" target="dht" value="GND → GND">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="130" y="290"/>
+                            <mxPoint x="130" y="710"/>
+                            <mxPoint x="960" y="710"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edhtdata" edge="1" parent="1" source="esp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#16A34A;strokeWidth=2;fontColor=#15803D;fontSize=13;defaultLabelBackgroundColor=page;" target="dht" value="GPIO4 → DATA">
+                    <mxGeometry relative="1" x="0.0537" as="geometry">
+                        <mxPoint x="80" as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="250" y="230"/>
+                            <mxPoint x="250" y="615"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="legend" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#374151;" value="Đỏ: 3V3   |   Đen: GND   |   Màu khác: tín hiệu" vertex="1">
+                    <mxGeometry height="30" width="510" x="330" y="740" as="geometry"/>
+                </mxCell>
+                <mxCell id="dht3pin_note" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF8C5;strokeColor=#D6B656;fontSize=13;fontColor=#1F2937;" value="&lt;b&gt;DHT11 module 3-pin&lt;/b&gt;&lt;br&gt;+ = 3V3&lt;br&gt;- = GND&lt;br&gt;OUT = GPIO4&lt;br&gt;Module normally includes pull-up." vertex="1">
+                    <mxGeometry height="120" width="190" x="1085" y="545" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
